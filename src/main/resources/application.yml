@@ -1,0 +1,16 @@
+server:
+  port: 4000
+spring:
+  codec:
+    max-in-memory-size: 16MB
+  data:
+    r2dbc:
+      repositories:
+        enabled: true
+  r2dbc:
+    password: ${CDDS_PASSWORD}
+    username: ${CDDS_PASSWORD}
+    url: r2dbc:postgresql://localhost:5432/spring_reactive
+sport:
+  api:
+    url: https://sports.api.decathlon.com
