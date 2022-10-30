@@ -14,4 +14,7 @@ public interface SportRepository extends ReactiveCrudRepository<Sport, Integer> 
     @Query("INSERT INTO public.sport VALUES (:id, :name)")
     Mono<Sport> saveSport(@Param("id") Integer id,
                           @Param("name") String name);
+
+    @Query("SELECT DISTINCT * FROM public.sport s WHERE s.name = :name")
+    Mono<Sport> findByName(@Param("name") String name);
 }

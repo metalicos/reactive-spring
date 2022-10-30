@@ -1,5 +1,5 @@
 CREATE TABLE IF NOT EXISTS public.sport (
-    id int,
+    id serial,
     name text
 );
 

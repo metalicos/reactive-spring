@@ -20,4 +20,20 @@ public class SportHandler {
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(sportService.fill(), Sport.class);
     }
+
+    public Mono<ServerResponse> searchSportByName(ServerRequest serverRequest) {
+        var name = serverRequest.queryParam("q").orElseThrow();
+
+        return ServerResponse.ok()
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(sportService.one(name), Sport.class);
+    }
+
+    public Mono<ServerResponse> saveSportByName(ServerRequest serverRequest) {
+        var name = serverRequest.pathVariable("sportname");
+
+        return ServerResponse.ok()
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(sportService.save(name), Sport.class);
+    }
 }

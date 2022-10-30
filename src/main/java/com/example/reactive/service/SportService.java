@@ -14,20 +14,16 @@ public class SportService {
     private final SportRepository sportRepository;
     private final SportClient sportClient;
 
-    public Flux<Sport> list() {
-        return sportRepository.findAll();
-    }
-
-    public Mono<Sport> one(Integer id) {
-        return sportRepository.findById(id);
-    }
-
-    public Mono<Sport> add(Sport sport) {
-        return sportRepository.saveSport(sport.getId(), sport.getName());
+    public Mono<Sport> one(String name) {
+        return sportRepository.findByName(name);
     }
 
     public Flux<Sport> fill() {
         return sportClient.getSport()
                 .flatMap(sport -> sportRepository.saveSport(sport.getId(), sport.getName()));
+    }
+
+    public Mono<Sport> save(String name) {
+        return sportRepository.save(Sport.builder().name(name).build());
     }
 }

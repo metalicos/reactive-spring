@@ -13,6 +13,9 @@ public class SportRouter {
 
     @Bean
     public RouterFunction<ServerResponse> route(SportHandler sportHandler) {
-        return RouterFunctions.route(RequestPredicates.GET("/fill"), sportHandler::fill);
+        return RouterFunctions
+                .route(RequestPredicates.GET("/fill"), sportHandler::fill)
+                .andRoute(RequestPredicates.GET("/api/v1/sport"), sportHandler::searchSportByName)
+                .andRoute(RequestPredicates.POST("/api/v1/sport/{sportname}"), sportHandler::saveSportByName);
     }
 }
