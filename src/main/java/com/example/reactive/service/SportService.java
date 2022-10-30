@@ -23,11 +23,11 @@ public class SportService {
     }
 
     public Mono<Sport> add(Sport sport) {
-        return sportRepository.save(sport);
+        return sportRepository.saveSport(sport.getId(), sport.getName());
     }
 
     public Flux<Sport> fill() {
         return sportClient.getSport()
-                .flatMap(sportRepository::save);
+                .flatMap(sport -> sportRepository.saveSport(sport.getId(), sport.getName()));
     }
 }

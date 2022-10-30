@@ -9,7 +9,7 @@ import org.springframework.data.relational.core.mapping.Table;
 
 @Data
 @Builder
-@Table("SPORT")
+@Table("sport")
 @NoArgsConstructor
 @AllArgsConstructor
 public class Sport {

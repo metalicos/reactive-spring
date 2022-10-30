@@ -14,7 +14,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @Slf4j
 @Service
@@ -30,12 +29,12 @@ public class SportClient {
                 .retrieve()
                 .bodyToFlux(new ParameterizedTypeReference<HashMap<String, Object>>() {
                 })
-                .flatMap(resp -> Flux.fromIterable(populate((ArrayList<HashMap<String, Object>>) resp.get("data"))));
+                .flatMap(resp -> Flux.fromIterable(fetchSportList((ArrayList<HashMap<String, Object>>) resp.get("data"))));
     }
 
-    private List<Sport> populate(ArrayList<HashMap<String, Object>> arrayList) {
-       return arrayList.stream()
-                .map(data-> {
+    private List<Sport> fetchSportList(ArrayList<HashMap<String, Object>> sportDataList) {
+        return sportDataList.stream()
+                .map(data -> {
                     if (data.get("id") == null || data.get("attributes") == null) {
                         return new Sport();
                     }
